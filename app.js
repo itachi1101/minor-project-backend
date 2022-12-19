@@ -8,7 +8,7 @@ const helmet = require("helmet");
 const fileUpload = require('express-fileupload')
 // importing routes 
 const authRoutes = require('./routes/authRoutes')
-
+const billRoutes=require('./routes/billRoutes')
 
 
 env.config();
@@ -35,7 +35,7 @@ app.use(fileUpload({
   useTempFiles: true,
 }))
 app.use(authRoutes)
-
+app.use(billRoutes)
 app.listen(PORT, (req, res) => {
   console.log(`Server is running on PORT ${PORT}`);
 });

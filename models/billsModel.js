@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const env = require("dotenv");
-env.config();
+
 const billSchema = new mongoose.Schema(
     {
         userId: {
@@ -26,5 +23,5 @@ const billSchema = new mongoose.Schema(
 );
 
 
-const BillSchema = mongoose.model("BillSchema", billSchema);
-module.exports = BillSchema;
+const Bill = mongoose.model("BillSchema", billSchema);
+module.exports = Bill;
