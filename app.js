@@ -5,6 +5,11 @@ const cors = require("cors");
 const morgan = require("morgan");
 const env = require("dotenv");
 const helmet = require("helmet");
+const fileUpload = require('express-fileupload')
+// importing routes 
+const authRoutes = require('./routes/authRoutes')
+
+
 
 env.config();
 const app = express();
@@ -26,6 +31,10 @@ try {
   process.exit();
 }
 
+app.use(fileUpload({
+  useTempFiles: true,
+}))
+app.use(authRoutes)
 
 app.listen(PORT, (req, res) => {
   console.log(`Server is running on PORT ${PORT}`);

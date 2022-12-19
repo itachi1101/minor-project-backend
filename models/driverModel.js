@@ -22,7 +22,7 @@ const driverSchema = new mongoose.Schema(
         vehicleNo: {
             type: String,
             required: true,
-            unique:true
+            unique: true
         },
         password: {
             type: String,
@@ -31,37 +31,33 @@ const driverSchema = new mongoose.Schema(
         imagePath: {
             type: String,
         },
-        type: {
-            type: String,
-            required: true
-        },
     },
     { timestamps: true }
 );
-userSchema.methods.toJSON = function () {
-    const user = this;
-    const userObject = user.toObject();
+driverSchema.methods.toJSON = function () {
+    const driver = this;
+    const driverObject = driver.toObject();
 
-    delete userObject.password;
-    delete userObject.tokens;
+    delete driverObject.password;
+    delete driverObject.tokens;
 
-    return userObject;
+    return driverObject;
 };
 
-userSchema.methods.generateAuthToken = async function () {
-    const user = this;
+driverSchema.methods.generateAuthToken = async function () {
+    const driver = this;
     const token = jwt.sign(
-        { _id: user._id.toString(), isAdmin: user.isAdmin },
+        { _id: driver._id.toString() },
         process.env.JWT_SECRET
     );
-    user.token = token;
-    await user.save();
+    driver.token = token;
+    await driver.save();
     return token;
 };
 
 // login method
-userSchema.statics.findByCredentials = async (adharNo, password) => {
-    const user = await User.findOne({ adharNo });
+driverSchema.statics.findByCredentials = async (adharNo, password) => {
+    const user = await Driver.findOne({ adharNo });
     if (!user) {
         throw new Error("Adhar Number Not Found");
     }
@@ -73,10 +69,10 @@ userSchema.statics.findByCredentials = async (adharNo, password) => {
 };
 
 // hasing password before saving
-userSchema.pre("save", async function (next) {
-    const user = this;
-    if (user.isModified("password")) {
-        user.password = await bcrypt.hash(user.password, 8);
+driverSchema.pre("save", async function (next) {
+    const driver = this;
+    if (driver.isModified("password")) {
+        driver.password = await bcrypt.hash(driver.password, 8);
     }
     next();
 });

@@ -31,10 +31,6 @@ const userSchema = new mongoose.Schema(
         imagePath: {
             type: String,
         },
-        type: {
-            type: String,
-            required: true
-        },
     },
     { timestamps: true }
 );
@@ -51,7 +47,7 @@ userSchema.methods.toJSON = function () {
 userSchema.methods.generateAuthToken = async function () {
     const user = this;
     const token = jwt.sign(
-        { _id: user._id.toString(), isAdmin: user.isAdmin },
+        { _id: user._id.toString() },
         process.env.JWT_SECRET
     );
     user.token = token;
@@ -60,8 +56,8 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 // login method
-userSchema.statics.findByCredentials = async (adharNo, password) => {
-    const user = await User.findOne({ adharNo });
+userSchema.statics.findByCredentials = async (adharNo, houseNo,password) => {
+    const user = await User.findOne({ adharNo,houseNo });
     if (!user) {
         throw new Error("Adhar Number Not Found");
     }
