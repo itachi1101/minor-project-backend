@@ -5,10 +5,10 @@ const auth = require("../middlewares/authMiddleware");
 
 
 
-router.post("/api/driver/update/", auth, driverController.updateProfile);
-router.get("/api/driver/details/", auth, driverController.getUserDetails);
-router.delete("api/driver/delete/", auth, driverController.deleteUser)
-
+// router.post("/api/driver/update/", auth, driverController.updateProfile);
+router.get("/api/driver/details/", auth, driverController.getDriverDetails);
+router.delete("api/driver/delete/", auth, driverController.deleteDriver)
+router.get("/api/driver/sectors/",auth,driverController.getAllocatedSectors)
 
 
 module.exports = router;

@@ -16,6 +16,19 @@ module.exports.getUserDetails = async (req, res) => {
 }
 
 
+// get user by sector 
+module.exports.getUsersBySector = async (req, res) => {
+    try {
+        const { sector } = req.body
+        const users = await User.find({ sector })
+        res.status(200).send({ users })
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+}
+
+
+
 
 // delete user 
 module.exports.deleteUser = async (req, res) => {

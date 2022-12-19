@@ -24,10 +24,15 @@ const userSchema = new mongoose.Schema(
             required: true,
             unique: true
         },
+        sector: {
+            type: String,
+            required: true
+        },
         password: {
             type: String,
             require: true
         },
+
         imagePath: {
             type: String,
         },
@@ -56,8 +61,8 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 // login method
-userSchema.statics.findByCredentials = async (adharNo, houseNo,password) => {
-    const user = await User.findOne({ adharNo,houseNo });
+userSchema.statics.findByCredentials = async (adharNo, houseNo, password) => {
+    const user = await User.findOne({ adharNo, houseNo });
     if (!user) {
         throw new Error("Adhar Number Not Found");
     }
