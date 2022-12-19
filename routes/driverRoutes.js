@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const driverController = require("../controllers/driverController");
 const router = Router();
-const auth = require("../middleware/authMiddleware");
+const auth = require("../middlewares/authMiddleware");
 
 
 

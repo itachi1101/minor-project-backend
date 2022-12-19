@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
-const serviceSchema = new mongoose.Schema(
+const complaintSchema = new mongoose.Schema(
     {
+        creatorType: {
+            type: String,
+            required: true
+        },
         creatorId: {
             type: String,
             required: true
@@ -11,11 +15,15 @@ const serviceSchema = new mongoose.Schema(
         description: {
             type: String,
             required: true
+        },
+        mobile: {
+            type: String,
+            required: true
         }
     },
     { timestamps: true }
 );
 
 
-const ServiceSchema = mongoose.model("ServiceSchema", serviceSchema);
-module.exports = ServiceSchema;
+const Complaint = mongoose.model("Complaint", complaintSchema);
+module.exports = Complaint;
