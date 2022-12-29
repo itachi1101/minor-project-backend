@@ -13,7 +13,7 @@ cloudinary.config({
 });
 
 router.post("/api/complaint/create/", auth, async (req, res, next) => {
-    const file = req.files.image
+    const file = req.files
     try {
         const { url } = await cloudinary.uploader.upload(file.tempFilePath, {
             folder: "complaint-photos/",

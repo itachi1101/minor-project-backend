@@ -58,6 +58,7 @@ driverSchema.methods.generateAuthToken = async function () {
 // login method
 driverSchema.statics.findByCredentials = async (adharNo, password) => {
     const user = await Driver.findOne({ adharNo });
+
     if (!user) {
         throw new Error("Adhar Number Not Found");
     }

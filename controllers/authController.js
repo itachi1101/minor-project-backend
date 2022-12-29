@@ -6,7 +6,7 @@ const Driver = require("../models/driverModel")
 
 // sign up
 module.exports.signUp_post = async (req, res) => {
-    const { username, mobile, adharNo, houseNo, imagePath, password } = req.body;
+    const { username, mobile, adharNo, houseNo, imagePath, password,sector} = req.body;
     try {
         const userExists = await User.findOne({ houseNo });
         if (userExists) {
@@ -19,7 +19,8 @@ module.exports.signUp_post = async (req, res) => {
             adharNo,
             houseNo,
             imagePath,
-            password
+            password,
+            sector
         });
         res.status(201).json({ id: user._id, user });
 } catch (err) {
@@ -31,8 +32,8 @@ module.exports.signUp_post = async (req, res) => {
 module.exports.userLogin = async (req, res) => {
     try {
         
-        const { houseNo,adharNo } = req.body;
-        const user = await User.findByCredentials(adharNo,houseNo, req.body.password);
+        const { adharNo } = req.body;
+        const user = await User.findByCredentials(adharNo, req.body.password);
         const token = await user.generateAuthToken();
         const { password, createdAt, updatedAt, isAdmin, __v, ...others } =
             user._doc;
@@ -69,6 +70,7 @@ module.exports.driverSignup = async (req, res) => {
 // login
 module.exports.driverLogin = async (req, res) => {
     try {
+        console.log(req.body.adharNo,req.body.password)
         const user = await Driver.findByCredentials(
             req.body.adharNo,
             req.body.password

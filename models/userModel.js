@@ -61,8 +61,8 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 // login method
-userSchema.statics.findByCredentials = async (adharNo, houseNo, password) => {
-    const user = await User.findOne({ adharNo, houseNo });
+userSchema.statics.findByCredentials = async (adharNo, password) => {
+    const user = await User.findOne({ adharNo });
     if (!user) {
         throw new Error("Adhar Number Not Found");
     }

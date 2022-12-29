@@ -5,9 +5,9 @@ const User = require("../models/userModel");
 
 // get user 
 module.exports.getUserDetails = async (req, res) => {
-    const { adharNo, houseNo } = req.body
+    const { adharNo } = req.body
     try {
-        const user = await User.findOne({ adharNo, houseNo })
+        const user = await User.findOne({ adharNo })
         res.status(200).send({ id: user._id, user });
     }
     catch (error) {
