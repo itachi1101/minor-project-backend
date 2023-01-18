@@ -10,6 +10,9 @@ const fileUpload = require('express-fileupload')
 const authRoutes = require('./routes/authRoutes')
 const billRoutes = require('./routes/billRoutes')
 const complaintRoutes = require('./routes/complaintRoute')
+const pushNotificationRoutes=require('./routes/pushNotificationRoutes')
+
+
 
 env.config();
 const app = express();
@@ -39,6 +42,9 @@ app.use(fileUpload({
 app.use(authRoutes)
 app.use(billRoutes)
 app.use(complaintRoutes)
+app.use(pushNotificationRoutes)
+
+
 
 app.listen(PORT, (req, res) => {
   console.log(`Server is running on PORT ${PORT}`);
