@@ -45,3 +45,24 @@ module.exports.deleteUser = async (req, res) => {
         res.status(400).send({ error: error.message })
     }
 }
+
+// get all users
+module.exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find()
+        res.status(200).send(users)
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+}
+// get user by id 
+module.exports.getUserById = async (req, res) => {
+    try {
+        const {id} = req.params
+        const user = await User.findById(id)
+        res.status(200).send(user)
+
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}

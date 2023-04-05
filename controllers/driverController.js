@@ -37,3 +37,35 @@ module.exports.getAllocatedSectors = async (req, res) => {
     }
 }
 
+
+module.exports.getAllDriver = async (req, res) => {
+    try {
+        const data = await Driver.find()
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+}
+module.exports.getDriverById=async(req,res)=>{
+    try {
+        const {id}=req.params
+        const driver=await Driver.findById(id)
+        res.status(200).send(driver)
+    } catch (error) {
+        res.status(400).send({error:error.message})
+    }
+}
+module.exports.allocateSectors=async(req,res)=>{
+    try {
+        const {id}=req.body
+        const {newSectors}=req.body
+        const driver=await Driver.findById(id)
+        const update=[...driver.sectors,...newSectors]
+        // console.log(update)
+        await driver.updateOne({sectors:update})
+        
+        res.status(200).send("Success")
+    } catch (error) {
+        res.status(400).send({error:error.message})
+    }
+}

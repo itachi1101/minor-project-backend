@@ -31,6 +31,7 @@ const driverSchema = new mongoose.Schema(
         imagePath: {
             type: String,
         },
+        sectors: [ ]
     },
     { timestamps: true }
 );
