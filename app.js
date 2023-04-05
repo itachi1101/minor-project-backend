@@ -51,7 +51,7 @@ app.use(driverRoutes)
 app.post('/add', async (req, res) => {
   try {
     const [lat, lng] = Object.keys(req.body)[0].split(' ')
-    const API_KEY = process.env.API_KEY
+    const API_KEY = process.env.API_KEY_ONE
     const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=5&appid=${API_KEY}`
     const data = await axios.get(url);
     const tokens =["fR0r3lefQmeh5Sr3bftQ4m:APA91bHvvb1O1SEy-CHQ_T_1ukjs5c64BrG0n8aOJvRgwk5XghBjchSWtlPobtsf6NHmqlo0DjYN2iDekkoT3cx4PZSGba3naTaMS1hWM7iAU0WReFRkoDb-ropBlED4lIP34NOdRaj8"]
