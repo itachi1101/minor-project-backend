@@ -4,11 +4,10 @@ const Complaint = require("../models/complaintModel");
 // create complaint
 module.exports.createComplaint = async (req, res) => {
     try {
-        const { creatorType, imagePath, description, mobile } = req.body
+        const { creatorType, description, mobile,creatorId } = req.body
         const complaint = await Complaint.create({
             creatorType,
-            creatorId: req.user._id,
-            imagePath,
+            creatorId,
             description,
             mobile
         })
@@ -35,6 +34,16 @@ module.exports.getComplaintById = async (req, res) => {
     try {
         const complaints = await Complaint.find({ creatorId: req.user._id })
         res.status(200).send({ complaints })
+    } catch (error) {
+        res.status(400).send({ error: error.message })
+    }
+}
+// get complaint by creator type
+module.exports.getComplaintByCreatorType = async (req, res) => {
+    try {
+        const { creatorType } = req.body
+        const complaints = await Complaint.find({ creatorType })
+        res.status(200).send(complaints)
     } catch (error) {
         res.status(400).send({ error: error.message })
     }
