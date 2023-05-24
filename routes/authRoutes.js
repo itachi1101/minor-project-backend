@@ -31,7 +31,7 @@ router.post("/api/user/signup/", async (req, res, next) => {
     }
 }, authController.signUp_post);
 
-router.post("/api/user/login/", authController.userLogin);
+router.post("/user/login/", authController.userLogin);
 
 
 //------------------------DRIVER ROUTES --------------------
